@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="73bd191d-6fb8-4ed5-a05f-185e3e6de1d8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/crm/proxy.conf.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/App.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Analytics/Analytics.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Analytics/AnalyticsPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Categories/Assortment.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Categories/Assortment.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Categories/CategoryForm/Category.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Categories/CategoryForm/Category.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Categories/CategoryForm/CategoryForm.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Categories/CategoryForm/CategoryForm.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Categories/CategoryForm/PositionsForm/Position.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Categories/CategoryForm/PositionsForm/PositionForm.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Categories/CategoryForm/PositionsForm/PositionForm.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Categories/CategoryForm/PositionsForm/Positions.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Categories/CategoryForm/PositionsForm/Positions.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Component/Forma/FormaAuth.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Component/Forma/FormaCategories.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Component/Forma/FormaPositions.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Component/Modal/ListModal.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Component/Modal/ListModal.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Component/Request/request.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Component/Request/requestAnalytics.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Component/Request/requestAuth.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Component/Request/requestCategories.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Component/Request/requestOrder.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Component/Request/requestPositions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Component/Style/content.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/History/HistoryFilter/HistoryFilter.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/History/HistoryFilter/HistoryFilter.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/History/HistoryList/HistoryList.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/History/HistoryList/HistoryList.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/History/HistoryPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Login/Login.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Login/LoginPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Order/Order.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Order/Order.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Order/OrderCategories/OrderCategories.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Order/OrderCategories/OrderCategories.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Order/OrderModal.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Order/OrderPositions/OrderPosition.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Order/OrderPositions/OrderPosition.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Order/OrderPositions/OrderPositions.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Overview/Overview.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Overview/OverviewPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Register/RegisterPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Sidebar/Sidbar.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/Components/Sidebar/Sidebar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/State/Reselect/analytics-reselect.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/State/Reselect/auth-reselect.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/State/Reselect/categories-reselect.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/State/Reselect/order-reselect.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/State/Reselect/position-reselect.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/State/analytics-reducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/State/auth-reducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/State/categories-reducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/State/order-reducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/State/positions-reducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/redux-state.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crm/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/crm/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crm/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/crm/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crm/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/crm/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crm/src/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/crm/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/crm/src/index.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/crm" />
+  </component>
+  <component name="ProjectId" id="1kt45Eotrwg5BsljOt7ZINyK7uZ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../three-project" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="D:\999\IT\react\project\two-project\crm\node_modules\typescript\lib" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="73bd191d-6fb8-4ed5-a05f-185e3e6de1d8" name="Default Changelist" comment="" />
+      <created>1606506368665</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1606506368665</updated>
+      <workItem from="1606506369960" duration="52000" />
+      <workItem from="1606506755968" duration="133000" />
+      <workItem from="1607274512682" duration="184000" />
+      <workItem from="1607275061680" duration="5504000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1607281459325">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1607281459325" />
+  </component>
+</project>
