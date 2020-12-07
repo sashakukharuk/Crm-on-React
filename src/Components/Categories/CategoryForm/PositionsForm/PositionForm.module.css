@@ -1,0 +1,129 @@
+.modalOverlay {
+    position: fixed;
+    z-index: 1002;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background: #000;
+    will-change: opacity;
+    opacity: .5;
+}
+
+.modal {
+    z-index: 1003;
+    display: block;
+    opacity: 1;
+    top: 10%;
+    transform: scaleX(1) scaleY(1);
+    position: fixed;
+    left: 0;
+    right: 0;
+    background-color: #fafafa;
+    padding: 0;
+    max-height: 70%;
+    width: 55%;
+    margin: auto;
+    overflow-y: auto;
+    border-radius: 2px;
+    will-change: top, opacity;
+    opacity: 1;
+}
+
+.modal .content {
+    text-align: left;
+    padding: 24px;
+}
+
+.modal .content h4 {
+    margin: 0;
+    display: block;
+    line-height: 32px;
+    margin-bottom: 8px;
+    font-size: 24px;
+    font-weight: 300;
+}
+
+.modal .content .field input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #9e9e9e;
+    border-radius: 0;
+    outline: none;
+    height: 3rem;
+    width: 100%;
+    font-size: 16px;
+    margin: 0 0 8px 0;
+    padding: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    -webkit-transition: border .3s, -webkit-box-shadow .3s;
+    transition: box-shadow .3s, border .3s, -webkit-box-shadow .3s;
+}
+
+.modal .content .field input:focus {
+    border-bottom: 1px solid #26a69a;
+    -webkit-box-shadow: 0 1px 0 0 #26a69a;
+    box-shadow: 0 1px 0 0 #26a69a;
+}
+
+.modal .footer {
+    height: 56px;
+    padding: 4px 6px;
+    text-align: right;
+}
+
+.modal .footer .btnLeft {
+    margin-top: 20px;
+    margin-right: 5px;
+    outline: none;
+    border: none;
+    border-radius: 2px;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 16px;
+    text-transform: uppercase;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+    color: #343434;
+    background-color: #fafafa;
+    text-align: center;
+    letter-spacing: .5px;
+    -webkit-transition: background-color .2s ease-out;
+    transition: background-color .2s ease-out;
+    cursor: pointer;
+}
+
+.modal .footer .btnLeft:hover {
+    color: white;
+    background-color: #757575;
+}
+
+.modal .footer .btnRight {
+    margin-top: 20px;
+    outline: none;
+    border: none;
+    border-radius: 2px;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 16px;
+    text-transform: uppercase;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+    color: #fff;
+    background-color: #26a69a;
+    text-align: center;
+    letter-spacing: .5px;
+    -webkit-transition: background-color .2s ease-out;
+    transition: background-color .2s ease-out;
+    cursor: pointer;
+}
+
+.modal .footer .btnRight:hover {
+    opacity: .8;
+}

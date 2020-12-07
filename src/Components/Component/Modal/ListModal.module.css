@@ -1,0 +1,57 @@
+.modalContent {
+    position: absolute;
+    height: calc(100% - 56px);
+    max-height: 100%;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.table {
+    width: 100%;
+    display: table;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.table tr th {
+    padding: 15px 5px;
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+    border-radius: 2px;
+}
+
+.table tr {
+    border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+
+.table tr td {
+    padding: 15px 5px;
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+    border-radius: 2px;
+}
+
+.orderSummary {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 20px;
+    padding-right: 30px;
+}
+
+.deleteBtn {
+    cursor: pointer;
+    background-color:  red;
+    text-align: center;
+    letter-spacing: .5px;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    display: inline-block;
+    outline: none;
+}
+
+.deleteBtn:hover {
+    opacity: .8;
+}
