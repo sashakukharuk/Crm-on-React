@@ -1,6 +1,7 @@
 const Category = require('../models/Category')
 const Position = require('../models/Position')
 const errorHandlers = require('../utils/errorHandler')
+const fs = require('fs')
 
 module.exports.getAll = async function (req, res) {
     try {
@@ -20,6 +21,14 @@ module.exports.getById = async function (req, res) {
 }
 module.exports.remove = async function (req, res) {
     try{
+        const oldCategory = await Category.findById(req.params.id)
+
+        if (oldCategory.imageSrc) {
+            fs.unlink(oldCategory.imageSrc, err => {
+                if (err) errorHandlers(res, 'Category deleted')
+            })
+        }
+
         await Category.remove({_id: req.params.id})
         await Position.remove({category: req.params.id})
         res.status(200).json({
@@ -43,6 +52,14 @@ module.exports.create = async function (req, res) {
     }
 }
 module.exports.update = async function (req, res) {
+    const oldCategory = await Category.findById(req.params.id)
+
+    if (oldCategory.imageSrc) {
+        fs.unlink(oldCategory.imageSrc, err => {
+            if (err) errorHandlers(res, 'the photo has been changed, reload page')
+        })
+    }
+
     const update = {
         name: req.body.name
     }
@@ -56,6 +73,6 @@ module.exports.update = async function (req, res) {
         {new: true})
         res.status(201).json(category)
     } catch (e) {
-        errorHandlers(e)
+        errorHandlers(res, e)
     }
 }

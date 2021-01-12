@@ -72,12 +72,15 @@ export const createCategoriesThunk = (token: string | null, image: File | null, 
     await requestCategoriesApi.postCategories(token, image, categories).then(res => {
         dispatch(actions.setCategory(res.data))
         dispatch(actions.setImagePreview(null))
+        dispatch(actions.setPhoto(null))
         dispatch(actions.isDisabledCAC(false))
         dispatch(actions.isNewCategory(false))
         MaterialService.toast('The category was added')
     }).catch(error => {
         MaterialService.toast(error.response.data.message)
         dispatch(actions.isDisabledCAC(false))
+        dispatch(actions.setImagePreview(null))
+        dispatch(actions.setPhoto(null))
     })
 
 }
@@ -96,10 +99,13 @@ export const updateByIdCategory = (token: string | null, image: File | null, cat
     await requestCategoriesApi.patchByIdCategory(token, image, categories, categoryId).then(res => {
         dispatch(actions.setCategory(res.data))
         dispatch(actions.setImagePreview(null))
+        dispatch(actions.setPhoto(null))
         dispatch(actions.isDisabledCAC(false))
         MaterialService.toast('Changes save')
     }).catch(error => {
         MaterialService.toast(error.response.data.message)
+        dispatch(actions.setImagePreview(null))
+        dispatch(actions.setPhoto(null))
         dispatch(actions.isDisabledCAC(false))
     })
 
