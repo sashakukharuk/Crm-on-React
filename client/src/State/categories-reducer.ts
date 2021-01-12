@@ -69,30 +69,47 @@ export const requestCategories = (token: string | null): ThunkType => async (dis
 
 export const createCategoriesThunk = (token: string | null, image: File | null, categories: CategoriesType): ThunkType => async (dispatch) => {
     dispatch(actions.isDisabledCAC(true))
-    let data = await requestCategoriesApi.postCategories(token, image, categories)
-    dispatch(actions.setCategory(data))
-    dispatch(actions.setImagePreview(null))
-    dispatch(actions.isDisabledCAC(false))
-    dispatch(actions.isNewCategory(false))
+    await requestCategoriesApi.postCategories(token, image, categories).then(res => {
+        dispatch(actions.setCategory(res.data))
+        dispatch(actions.setImagePreview(null))
+        dispatch(actions.isDisabledCAC(false))
+        dispatch(actions.isNewCategory(false))
+        MaterialService.toast('The category was added')
+    }).catch(error => {
+        MaterialService.toast(error.response.data.message)
+        dispatch(actions.isDisabledCAC(false))
+    })
+
 }
 
 export const requestByIdCategory = (token: string | null, categoryId: string): ThunkType => async (dispatch) => {
-    let data = await requestCategoriesApi.getByIdCategory(token, categoryId)
-    dispatch(actions.setCategory(data))
-    MaterialService.updateTextInputs()
+    await requestCategoriesApi.getByIdCategory(token, categoryId).then(res => {
+        dispatch(actions.setCategory(res.data))
+        MaterialService.updateTextInputs()
+    }).catch(error => {
+        MaterialService.toast(error.response.data.message)
+    })
 }
 
 export const updateByIdCategory = (token: string | null, image: File | null, categories: CategoriesType, categoryId: string): ThunkType => async (dispatch) => {
     dispatch(actions.isDisabledCAC(true))
-    let data = await requestCategoriesApi.patchByIdCategory(token, image, categories, categoryId)
-    dispatch(actions.setCategory(data))
-    dispatch(actions.setImagePreview(null))
-    dispatch(actions.isDisabledCAC(false))
+    await requestCategoriesApi.patchByIdCategory(token, image, categories, categoryId).then(res => {
+        dispatch(actions.setCategory(res.data))
+        dispatch(actions.setImagePreview(null))
+        dispatch(actions.isDisabledCAC(false))
+        MaterialService.toast('Changes save')
+    }).catch(error => {
+        MaterialService.toast(error.response.data.message)
+        dispatch(actions.isDisabledCAC(false))
+    })
+
 }
 
 export const removeByIdCategory = (token: string | null, categoryId: string): ThunkType => async (dispatch) => {
     dispatch(actions.isDisabledCAC(true))
-    await requestCategoriesApi.deleteByIdCategory(token, categoryId)
+    await requestCategoriesApi.deleteByIdCategory(token, categoryId).then(res => {
+        MaterialService.toast(res.data.message)
+    }).catch(error => MaterialService.toast(error.response.data.message))
     dispatch(actions.setCategory({name: '', imageSrc: '', user:'', _id: ''}))
     dispatch(actions.isNewCategory(true))
     dispatch(actions.isDisabledCAC(false))

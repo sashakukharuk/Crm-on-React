@@ -14,7 +14,7 @@ export const requestCategoriesApi = {
             headers: {
                 Authorization: token
             }
-        }).then(res => res.data)
+        })
     },
 
     postCategories (token: string | null, image: File | null, categories: CategoriesType) {
@@ -29,7 +29,7 @@ export const requestCategoriesApi = {
                 'content-type': 'multipart/form-data',
                 Authorization: token
             }
-        }).then(res => res.data)
+        })
     },
 
     patchByIdCategory (token: string | null, image: File | null, categories: CategoriesType, categoryId: string) {
@@ -44,7 +44,7 @@ export const requestCategoriesApi = {
                 'content-type': 'multipart/form-data',
                 Authorization: token
             }
-        }).then(res => res.data)
+        })
     },
 
     deleteByIdCategory (token: string | null, categoryId: string) {

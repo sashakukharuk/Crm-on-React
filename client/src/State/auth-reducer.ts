@@ -1,5 +1,6 @@
 import {BaseThunkType, InferActionsTypes} from "../redux-state";
 import {requestAuth} from "../Components/Component/Request/requestAuth";
+import {MaterialService} from "../Components/Component/Material/Material";
 
 export type User = {
     email: string
@@ -8,7 +9,6 @@ export type User = {
 
 let initialState = {
     token: null as string | null,
-    message: null as string | null,
     isDisabled: false
 }
 
@@ -18,9 +18,6 @@ export const authReducer = (state = initialState, action: ActionsTypes): Initial
     switch (action.type) {
         case 'SK/USER/AUTH': {
             return {...state, token: action.token}
-        }
-        case 'SK/MESSAGE/AUTH': {
-            return {...state, message: action.message}
         }
         case 'AUTH/IS/DISABLED': {
             return {...state, isDisabled: action.isDisabled}
@@ -34,26 +31,24 @@ type ThunkType = BaseThunkType<ActionsTypes>
 
 export const actions = {
     loginUser: (token: string | null) => ({type: 'SK/USER/AUTH', token} as const),
-    setMessage: (message: string) => ({type: 'SK/MESSAGE/AUTH', message} as const),
     isDisabledAC: (isDisabled: boolean) => ({type: 'AUTH/IS/DISABLED', isDisabled} as const)
 }
 
 export const loginThunk = (user: User): ThunkType => async (dispatch) => {
     dispatch(actions.isDisabledAC(true))
-    let data = await requestAuth.postLogin(user)
-    dispatch(actions.loginUser(data.token))
-    if(data.message) {
-        dispatch(actions.setMessage(data.message))
-    }
+    await requestAuth.postLogin(user).then(res => {
+        dispatch(actions.loginUser(res.data.token))
+    }).catch(error => {
+        MaterialService.toast(error.response.data.message)
+    })
     dispatch(actions.isDisabledAC(false))
 }
 
 export const registerThunk = (user: User): ThunkType => async (dispatch) => {
     dispatch(actions.isDisabledAC(true))
-    let data = await requestAuth.postRegister(user)
-    if(data.message) {
-        dispatch(actions.setMessage(data.message))
-    }
+    await requestAuth.postRegister(user).catch(error => {
+        MaterialService.toast(error.response.data.message)
+    })
     dispatch(actions.isDisabledAC(false))
 }
 

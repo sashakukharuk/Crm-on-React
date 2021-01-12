@@ -15,7 +15,7 @@ export const requestPositionsApi = {
             headers: {
                 Authorization: token
             }
-        }).then(res => res.data)
+        })
     },
 
     patchPositions (token: string | null, position: PositionsType) {
@@ -23,7 +23,7 @@ export const requestPositionsApi = {
             headers: {
                 Authorization: token
             }
-        }).then(res => res.data)
+        })
     },
 
     deletePositions (token: string | null, positionId: string | undefined) {
@@ -31,6 +31,6 @@ export const requestPositionsApi = {
             headers: {
                 Authorization: token
             }
-        }).then(res => res.data)
+        })
     }
 }

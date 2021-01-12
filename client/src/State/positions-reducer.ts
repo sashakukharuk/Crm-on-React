@@ -1,5 +1,6 @@
 import {BaseThunkType, InferActionsTypes} from "../redux-state";
 import {requestPositionsApi} from "../Components/Component/Request/requestPositions";
+import {MaterialService} from "../Components/Component/Material/Material";
 
 export type PositionsType = {
     name: string
@@ -88,20 +89,33 @@ export const getPositionsThunk = (token: string | null, categoryId: string): Thu
 
 export const createPositionsThunk = (token: string | null, position: PositionsType): ThunkType => async (dispatch) => {
     dispatch(actions.isDisabledAC(true))
-    let data = await requestPositionsApi.postPositions(token, position)
-    dispatch(actions.setPosition(data))
-    dispatch(actions.isDisabledAC(false))
+    await requestPositionsApi.postPositions(token, position).then(res => {
+        dispatch(actions.setPosition(res.data))
+        dispatch(actions.isDisabledAC(false))
+        MaterialService.toast('The position has been created')
+    }).catch(error => {
+        MaterialService.toast(error.response.data.message)
+        dispatch(actions.isDisabledAC(false))
+    })
 }
 
 export const updatePositionsThunk = (token: string | null, position: PositionsType): ThunkType => async (dispatch) => {
     dispatch(actions.isDisabledAC(true))
-    let data = await requestPositionsApi.patchPositions(token, position)
-    dispatch(actions.setPosition(data))
-    dispatch(actions.isDisabledAC(false))
+    await requestPositionsApi.patchPositions(token, position).then(res => {
+        dispatch(actions.setPosition(res.data))
+        dispatch(actions.isDisabledAC(false))
+        MaterialService.toast('Update save')
+    }).catch(error => {
+        MaterialService.toast(error.response.data.message)
+        dispatch(actions.isDisabledAC(false))
+    })
+
 }
 
 export const removePositionsThunk = (token: string | null, positionId: string | undefined): ThunkType => async (dispatch) => {
     dispatch(actions.removePositionAC(true, positionId))
-    await requestPositionsApi.deletePositions(token, positionId)
+    await requestPositionsApi.deletePositions(token, positionId).then(res => {
+        MaterialService.toast(res.data.message)
+    }).catch(error => MaterialService.toast(error.response.data.message))
     dispatch(actions.removePositionAC(false, positionId))
 }

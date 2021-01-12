@@ -8,11 +8,11 @@ type RequestUserType = {
 
 export const requestAuth = {
     postLogin (user: User) {
-        return instance.post<RequestUserType>('/api/auth/login', user).then(res => res.data).catch(error => error)
+        return instance.post<RequestUserType>('/api/auth/login', user)
     },
 
     postRegister (user: User) {
-        return instance.post<RequestUserType>('/api/auth/register', user).then(res => res.data)
+        return instance.post<RequestUserType>('/api/auth/register', user)
     },
 
     getToken () {

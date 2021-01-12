@@ -1,5 +1,6 @@
 import {BaseThunkType, InferActionsTypes} from "../redux-state";
 import {requestOrderApi} from "../Components/Component/Request/requestOrder";
+import {MaterialService} from "../Components/Component/Material/Material";
 
 export type Filter = {
     order: number
@@ -120,7 +121,9 @@ export const actionsOrder = {
 
 export const createOrderThunk = (token: string | null, order: Order): ThunkType => async (dispatch) => {
     dispatch(actionsOrder.isBtnAC(true))
-    await requestOrderApi.createOrder(token, order)
+    await requestOrderApi.createOrder(token, order).then(res => {
+        MaterialService.toast(`The order №${res.data.order} has been added`)
+    }).catch(error => MaterialService.toast(error.response.data.message))
     dispatch(actionsOrder.deleteOrderSAC([]))
     dispatch(actionsOrder.isBtnCompleteAC(true))
     dispatch(actionsOrder.isModalAC(false))
