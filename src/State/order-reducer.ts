@@ -3,8 +3,8 @@ import {requestOrderApi} from "../Components/Component/Request/requestOrder";
 
 export type Filter = {
     order: number
-    start: Date
-    end: Date
+    start: Date | string
+    end: Date | string
 }
 
 export type OrderPosition = {
@@ -27,7 +27,7 @@ export type Order = {
 let initialState = {
     orderPosition: [] as Array<OrderPosition>,
     order: {} as Order,
-    orders: [] as Array<Order>,
+    orders: null as null | Array<Order>,
     isModal: false,
     isBtnComplete: true,
     isBtnCreate: false,
@@ -127,7 +127,7 @@ export const createOrderThunk = (token: string | null, order: Order): ThunkType 
     dispatch(actionsOrder.isBtnAC(false))
 }
 
-export const getOrdersThunk = (token: string | null, start: Date, end: Date, order: number, offset: number, limit: number): ThunkType => async (dispatch) => {
+export const getOrdersThunk = (token: string | null, start: Date | string, end: Date | string, order: number, offset: number, limit: number): ThunkType => async (dispatch) => {
     dispatch(actionsOrder.isBtnAC(true))
     let data = await requestOrderApi.getOrder(token, start, end, order, offset, limit)
     dispatch(actionsOrder.setOrders(data))

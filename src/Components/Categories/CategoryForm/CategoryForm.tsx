@@ -2,7 +2,6 @@ import React, {ChangeEvent} from 'react'
 import {NavLink} from 'react-router-dom'
 import {FormCategories} from '../../Component/Forma/FormaCategories'
 import {useDispatch, useSelector} from 'react-redux'
-import s from './Category.module.css'
 
 import {
     actions,
@@ -12,17 +11,19 @@ import {
 } from '../../../State/categories-reducer'
 import {Positions} from './PositionsForm/Positions'
 import {
-    CategorySelector,
+    CategorySelector, ImagePreviewSelector,
     ImageSelector,
     IsDisabledCSelector,
     IsNewSelector
 } from '../../../State/Reselect/categories-reselect'
 import {TokenSelector} from '../../../State/Reselect/auth-reselect'
+import {Preloader} from "../../Component/Preloader/Preloader";
 
 export const CategoryForm: React.FC = () => {
     const isNew = useSelector(IsNewSelector)
     const token = useSelector(TokenSelector)
     const image = useSelector(ImageSelector)
+    const imagePreview = useSelector(ImagePreviewSelector)
     const category = useSelector(CategorySelector)
     const isDisabledC = useSelector(IsDisabledCSelector)
     const dispatch = useDispatch()
@@ -31,49 +32,58 @@ export const CategoryForm: React.FC = () => {
     }
     const onImageChange = (e: any) => {
         const image = e.currentTarget.files[0]
+        const reader = new FileReader()
+        reader.onload = () => {
+            dispatch(actions.setImagePreview(reader.result as null | string))
+        }
+        reader.readAsDataURL(image)
+
         dispatch(actions.setPhoto(image))
     }
-    const submitCreate = (value: any, {setSubmitting}: {setSubmitting: (isSubmitting: boolean) => void}) => {
+    const sendCreate = () => {
         dispatch(createCategoriesThunk(token, image, category))
-        setSubmitting( false)
     }
-    const submitUpdate = (value: any, {setSubmitting}: {setSubmitting: (isSubmitting: boolean) => void}) => {
+    const sendUpdate = () => {
         dispatch(updateByIdCategory(token, image, category, category._id))
-        setSubmitting( false)
     }
     const submitDelete = () => {
         dispatch(removeByIdCategory(token, category._id))
     }
 
-    return (
-        <div>
-            <div className={s.pageTitle}>
+    return <>
+            <div className="page-title">
                 <h4>
-                    <NavLink to ='/categories'>Categories</NavLink>
-                    <i>/</i>
+                    <NavLink to='/categories'>Categories</NavLink>
+                    <i className="material-icons">keyboard_arrow_right</i>
                     <span>{isNew ? 'Add ' : 'Editing'} category</span>
                 </h4>
-                {!isNew && <span><button className={isDisabledC ? s.active : ''} disabled={isDisabledC} onClick={submitDelete}>delete</button></span>}
+                {!isNew && <span>
+                    <button className="btn btn-small red" disabled={isDisabledC} onClick={submitDelete}>
+                      <i className="material-icons">delete</i>
+                    </button>
+                </span>}
             </div>
+
             {isNew
                 ? <FormCategories
                     name={category.name}
                     imageSrc={category.imageSrc}
                     isDisabledC={isDisabledC}
+                    imagePreview={imagePreview}
                     onNameChange={onNameChange}
                     onImageChange={onImageChange}
-                    submit={submitCreate}
+                    sendCategory={sendCreate}
                 />
                 : <FormCategories
                     name={category.name}
                     imageSrc={category.imageSrc}
                     isDisabledC={isDisabledC}
+                    imagePreview={imagePreview}
                     onNameChange={onNameChange}
                     onImageChange={onImageChange}
-                    submit={submitUpdate}
+                    sendCategory={sendUpdate}
                 />
             }
-            {!isNew ? category._id ? <Positions categoryId={category._id}/> : <div>Loading...</div> : <div/>}
-        </div>
-    )
+            {!isNew ? category._id ? <Positions categoryId={category._id}/> : <Preloader/> : <div/>}
+        </>
 }

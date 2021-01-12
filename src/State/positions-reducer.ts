@@ -12,7 +12,7 @@ export type PositionsType = {
 }
 
 let initialState = {
-    positions: [] as Array<PositionsType>,
+    positions: null as null | Array<PositionsType>,
     position: {} as PositionsType,
     isForm: false,
     isUpdate: false,
@@ -53,6 +53,7 @@ export const positionsReducer = (state = initialState, actions: ActionsType): In
         case 'SK/SET/QUANTITY': {
             return {
                 ...state,
+                // @ts-ignore
                 positions: state.positions.map(p => {
                     if (p._id === actions.id) {
                         return {...p, quantity: actions.quantity}

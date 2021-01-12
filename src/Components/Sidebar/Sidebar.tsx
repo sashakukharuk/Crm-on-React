@@ -6,36 +6,15 @@ import {removeTokenThunk} from "../../State/auth-reducer";
 
 export const Sidebar = () => {
     const dispatch = useDispatch()
-    const clearToken = () => {
-        dispatch(removeTokenThunk())
-    }
-    return (
-        <div className={s.sidenav}>
-            <div className={s.header}>
-                <h4>Newborn</h4>
-            </div>
-            <div className={s.item}>
-                <NavLink to='/overview' activeClassName={s.active}>Review</NavLink>
-            </div>
-            <div className={s.item}>
-                <NavLink to='/analytics' activeClassName={s.active}>Analytics</NavLink>
-            </div>
-            <div className={s.item}>
-                <NavLink to='/history' activeClassName={s.active}>History</NavLink>
-            </div>
-            <div className={s.item}>
-                <NavLink to='/order' activeClassName={s.active}>Add order</NavLink>
-            </div>
-            <div className={s.item}>
-                <NavLink to='/categories' activeClassName={s.active}>Assortment</NavLink>
-            </div>
-
-            <div className={s.item}>
-                <NavLink to='/login' onClick={clearToken} activeClassName={s.active}>Check out</NavLink>
-                {/*<button onClick={clearToken}>*/}
-                {/*    Check out*/}
-                {/*</button>*/}
-            </div>
-        </div>
-    )
+    return <ul className="sidenav sidenav-fixed a-sidenav">
+        <h4>Newborn</h4>
+        <li className="bold"><NavLink to='/overview' className="waves-effect waves-orange" activeClassName={s.active}>Review</NavLink></li>
+        <li className="bold"><NavLink to='/analytics' className="waves-effect waves-orange" activeClassName={s.active}>Analytics</NavLink></li>
+        <li className="bold"><NavLink to='/history' className="waves-effect waves-orange" activeClassName={s.active}>History</NavLink></li>
+        <li className="bold"><NavLink to='/order' className="waves-effect waves-orange" activeClassName={s.active}>Add order</NavLink></li>
+        <li className="bold "><NavLink to='/categories' className="waves-effect waves-orange" activeClassName={s.active}>Assortment</NavLink></li>
+        <li className="bold last">
+            <NavLink to='/login' onClick={() => dispatch(removeTokenThunk())} className="waves-effect waves-orange" activeClassName={s.active}>Log out</NavLink>
+        </li>
+    </ul>
 }

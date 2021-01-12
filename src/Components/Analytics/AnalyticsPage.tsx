@@ -36,24 +36,23 @@ export const AnalyticsPage: React.FC = () => {
             }
         ]
     }
-
-    return (
-        <div>
-            <div className={s.pageTitle}>
-                <h4>Analytics</h4>
-            </div>
-            <div className={s.averagePrice}>
-                <p>Average check <strong>{average} uah.</strong></p>
-            </div>
-            <div className={s.analyticsBlock}>
-                <h4>Income</h4>
-                <Line data={gainConfig}/>
-            </div>
-
-            <div className={s.analyticsBlock}>
-                <h4>Order</h4>
-                <Line data={orderConfig}/>
-            </div>
+    return <>
+        <div className="page-title">
+            <h4>Analytics</h4>
         </div>
-    )
+
+        <div className="average-price">
+            <p>Average check <strong>{average} uah.</strong></p>
+        </div>
+
+        <div className={s.analyticsBlock}>
+            <h4>Income</h4>
+            <Line data={gainConfig}/>
+        </div>
+
+        <div className={s.analyticsBlock}>
+            <h4>Order</h4>
+            <Line data={orderConfig}/>
+        </div>
+    </>
 }

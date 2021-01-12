@@ -6,6 +6,7 @@ import {actions, getPositionsThunk} from "../../../State/positions-reducer";
 import {actionsOrder} from "../../../State/order-reducer";
 import {useParams} from 'react-router'
 import {OrderPosition} from "./OrderPosition";
+import {Preloader} from "../../Component/Preloader/Preloader";
 
 
 export const OrderPositions: React.FC = () => {
@@ -32,12 +33,16 @@ export const OrderPositions: React.FC = () => {
         dispatch(actionsOrder.isBtnCompleteAC(false))
     }
 
+    if (!positions) {
+        return <Preloader/>
+    }
+
     return (
         <div>
             {positions.length !== 0
                 ? <OrderPosition positions={positions} onQuantityChange={onQuantityChange} submitOrder={submitOrder}/>
-                : <div>
-                    There are no positions in the category
+                : <div className='center'>
+                    <h6>There are no positions in the category</h6>
                 </div>
             }
         </div>

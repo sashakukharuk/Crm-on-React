@@ -1,6 +1,4 @@
 import React, {useEffect} from 'react'
-import h from './HistoryList/HistoryList.module.css'
-import s from './HistoryFilter/HistoryFilter.module.css'
 import {HistoryFilter} from "./HistoryFilter/HistoryFilter";
 import {HistoryList} from "./HistoryList/HistoryList";
 import {useDispatch, useSelector} from "react-redux";
@@ -14,7 +12,8 @@ import {
     OrderSelector, OrdersSelector,
     STEPSelector
 } from "../../State/Reselect/order-reselect";
-import {actionsOrder, getOrdersThunk, Order} from "../../State/order-reducer";
+import {actionsOrder, getOrdersThunk} from "../../State/order-reducer";
+import {Preloader} from "../Component/Preloader/Preloader";
 
 export const HistoryPage: React.FC = () => {
     const token = useSelector(TokenSelector)
@@ -36,18 +35,9 @@ export const HistoryPage: React.FC = () => {
         limit += STEP
         dispatch(actionsOrder.setLimit(limit))
     }
-    const computePrice = (order: Order): number => {
-        return order.list.reduce((total, item) => {
-            // @ts-ignore
-            return total += item.quantity * item.cost
-        }, 0)
-    }
-    const onModal = (isModal: boolean, order: Order) => {
-        dispatch(actionsOrder.setOrderAC(order))
-        dispatch(actionsOrder.isModalAC(isModal))
-    }
-    const onFilter = (isFilter: boolean) => {
-        dispatch(actionsOrder.isFilterAC(isFilter))
+
+    const onFilter = () => {
+        dispatch(actionsOrder.isFilterAC(!isFilter))
     }
 
     if (order.list) {
@@ -57,29 +47,39 @@ export const HistoryPage: React.FC = () => {
         })
     }
 
-    return (
-        <div>
-            <div className={s.pageTitle}>
-                <h4>Order history</h4>
-                {isFilter
-                ? <button className={s.btn} onClick={() => onFilter(false)}>
-                    <i>filter</i>
-                </button>
-                : <button className={s.btn} onClick={() => onFilter(true)}>
-                    <i>filter</i>
-                </button>
-                }
-            </div>
-            {isFilter && <HistoryFilter/>}
-            {orders.length !==0
+    return <>
+        <div className="page-title">
+            <h4>Order history</h4>
+            <button className="btn btn-small js-filter tooltipped" onClick={onFilter} data-tooltip="Открыть фильтр">
+                <i className="material-icons">filter_list</i>
+            </button>
+        </div>
+
+        {isFilter && <HistoryFilter/>}
+
+        {!orders ? <Preloader/>
+        : orders.length !== 0
             ? <div>
-                <HistoryList orderPrice={orderPrice} orders={orders} order={order} isModal={isModal} computePrice={computePrice} onModal={onModal}/>
-                <button className={h.btn} disabled={orders.length < STEP || isSeeMore} onClick={() => loadMore(limit)}>See more</button>
+                <HistoryList
+                    orderPrice={orderPrice}
+                    orders={orders}
+                    order={order}
+                    isModal={isModal}
+                />
+
+                <div className="center mb2">
+                    <button
+                        className="btn waves-effect grey darken-1 btn-small"
+                        disabled={orders.length < STEP || isSeeMore}
+                        onClick={() => loadMore(limit)}
+                    >
+                        See more
+                    </button>
+                </div>
             </div>
-            : <div>
+            : <div className="center">
                 There are no orders yet.
             </div>
-            }
-        </div>
-    )
+        }
+    </>
 }

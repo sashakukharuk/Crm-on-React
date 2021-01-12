@@ -53,19 +53,21 @@ export const OrderPage: React.FC = () => {
 
     return (
         <div>
-            <div className={s.pageTitle}>
-                {!isAddProduct
-                    ? <h4>Order</h4>
+            <div className="page-title">
+                {!isAddProduct ? <h4>Order</h4>
                     : <h4>
                         <NavLink onClick={toggleIsRoot} to='/order/'>Order</NavLink>
-                        <i>/</i>
+                        <i className="material-icons">keyboard_arrow_right</i>
                         Add product
-                    </h4>
-                }
-                <button className={isBtnComplete ? s.active : ''} disabled={isBtnComplete} onClick={() => orderModalChange(true)}>
+                    </h4>}
+                <button
+                    className="waves-effect btn grey darken-1 modal-trigger"
+                    disabled={isBtnComplete} onClick={() => orderModalChange(true)}
+                >
                     Complete
                 </button>
             </div>
+
             {isModal && <div>
                 <div className={m.modalOverlay} onClick={() => orderModalChange(false)}/>
                 <OrderModal

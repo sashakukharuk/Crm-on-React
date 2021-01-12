@@ -1,7 +1,6 @@
 import {User} from "../../../State/auth-reducer";
 import {instance} from "./request";
 
-
 type RequestUserType = {
     token: string
     message: string
@@ -9,19 +8,19 @@ type RequestUserType = {
 
 export const requestAuth = {
     postLogin (user: User) {
-        return instance.post<RequestUserType>('auth/login', user).then(res => res.data)
+        return instance.post<RequestUserType>('/api/auth/login', user).then(res => res.data).catch(error => error)
     },
 
     postRegister (user: User) {
-        return instance.post<RequestUserType>('auth/register', user).then(res => res.data)
+        return instance.post<RequestUserType>('/api/auth/register', user).then(res => res.data)
     },
 
     getToken () {
-        return instance.get('auth/').then(res => res.data)
+        return instance.get('/api/auth/').then(res => res.data)
     },
 
     removeToken () {
-        return instance.delete('auth/').then(res => res.data)
+        return instance.delete('/api/auth/').then(res => res.data)
     }
 }
 

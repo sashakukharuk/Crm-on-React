@@ -1,5 +1,6 @@
 import {BaseThunkType, InferActionsTypes} from "../redux-state";
 import {requestCategoriesApi} from "../Components/Component/Request/requestCategories";
+import {MaterialService} from "../Components/Component/Material/Material";
 
 export type CategoriesType = {
     name: string
@@ -9,10 +10,11 @@ export type CategoriesType = {
 }
 
 let initialState = {
-    categories: [] as Array<CategoriesType>,
+    categories: null as null | Array<CategoriesType>,
     category: {} as CategoriesType,
     image: null as File | null,
-    isNew: true,
+    imagePreview: null as null | string,
+    isNew: false,
     isDisabledC: false
 }
 
@@ -32,6 +34,9 @@ export const categoriesReducer = (state = initialState, actions: ActionsType): I
         case 'SK/SET/PHOTO': {
             return {...state, image: actions.image}
         }
+        case 'SK/SET/IMAGE_PREVIEW': {
+            return {...state, imagePreview: actions.imagePreview}
+        }
         case 'SK/IS/NEW': {
             return {...state, isNew: actions.isNew}
         }
@@ -50,6 +55,7 @@ export const actions = {
     setCategory: (category: CategoriesType) => ({type: 'SK/SET/CATEGORY', category} as const),
     setName: (name: string) => ({type: 'SK/SET/NAME', name} as const),
     setPhoto: (image: File | null) => ({type: 'SK/SET/PHOTO', image} as const),
+    setImagePreview: (imagePreview: null | string) => ({type: 'SK/SET/IMAGE_PREVIEW', imagePreview} as const),
     isNewCategory: (isNew: boolean) => ({type:'SK/IS/NEW', isNew} as const),
     isDisabledCAC: (isDisabledC: boolean) => ({type:'SK/IS/DISABLED', isDisabledC} as const)
 }
@@ -58,13 +64,14 @@ export const requestCategories = (token: string | null): ThunkType => async (dis
     let data = await requestCategoriesApi.getCategories(token)
     dispatch(actions.setCategories(data))
     dispatch(actions.setCategory({name: '', imageSrc: '', user:'', _id: ''}))
-    dispatch(actions.isNewCategory(true))
+    dispatch(actions.isNewCategory(false))
 }
 
 export const createCategoriesThunk = (token: string | null, image: File | null, categories: CategoriesType): ThunkType => async (dispatch) => {
     dispatch(actions.isDisabledCAC(true))
     let data = await requestCategoriesApi.postCategories(token, image, categories)
     dispatch(actions.setCategory(data))
+    dispatch(actions.setImagePreview(null))
     dispatch(actions.isDisabledCAC(false))
     dispatch(actions.isNewCategory(false))
 }
@@ -72,13 +79,14 @@ export const createCategoriesThunk = (token: string | null, image: File | null, 
 export const requestByIdCategory = (token: string | null, categoryId: string): ThunkType => async (dispatch) => {
     let data = await requestCategoriesApi.getByIdCategory(token, categoryId)
     dispatch(actions.setCategory(data))
-    dispatch(actions.isNewCategory(false))
+    MaterialService.updateTextInputs()
 }
 
 export const updateByIdCategory = (token: string | null, image: File | null, categories: CategoriesType, categoryId: string): ThunkType => async (dispatch) => {
     dispatch(actions.isDisabledCAC(true))
     let data = await requestCategoriesApi.patchByIdCategory(token, image, categories, categoryId)
     dispatch(actions.setCategory(data))
+    dispatch(actions.setImagePreview(null))
     dispatch(actions.isDisabledCAC(false))
 }
 

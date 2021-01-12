@@ -1,7 +1,6 @@
 import {BaseThunkType, InferActionsTypes} from "../redux-state";
 import {requestAuth} from "../Components/Component/Request/requestAuth";
 
-
 export type User = {
     email: string
     password: string

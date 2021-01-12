@@ -1,65 +1,77 @@
-import * as React from 'react'
-import s from '../../Login/Login.module.css'
-import {Field, Form, Formik} from "formik";
+import React from 'react'
+import {useFormik} from "formik";
 import {User} from '../../../State/auth-reducer'
-import {useDispatch, useSelector} from "react-redux";
-import {NavLink} from "react-router-dom";
-import cn from 'classnames'
-import {IsDisabledAuthSelector} from "../../../State/Reselect/auth-reselect";
 
 type PropsType = {
     namePage: string
     nameBtn: string
-    thunkCreator: (user: User) => void
+    isDisabled: boolean
+    submitForm: (user: User) => void
 }
 
-export const FormPage: React.FC<PropsType> = ({namePage, nameBtn,thunkCreator}) => {
-    const isDisabled = useSelector(IsDisabledAuthSelector)
-    const dispatch = useDispatch()
-    const submit = (values: User, {setSubmitting}: {setSubmitting: (isSubmitting: boolean) => void}) => {
+export const FormPage: React.FC<PropsType> = ({namePage, nameBtn, isDisabled, submitForm}) => {
+    const onSubmit = (values: User) => {
         const user: User = {
             email: values.email,
             password: values.password
         }
-        dispatch(thunkCreator(user))
-        setSubmitting(false)
+        submitForm(user)
     }
+
+    const validate = (values: User) => {
+        const errors = {} as User
+
+        if (!values.password) {
+            errors.password = 'Required';
+        } else if (values.password.length < 6) {
+            errors.password = 'Must be 6 characters or more';
+        }
+
+        if (!values.email) {
+            errors.email = 'Required';
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+            errors.email = 'Invalid email address';
+        }
+
+        return errors;
+    };
+
+    const formik = useFormik({
+        initialValues: {email: '', password: ''},
+        validate,
+        onSubmit
+    })
+
     return (
-        <Formik
-            initialValues={{email: '', password: ''}}
-            onSubmit={submit}
-        >
-            {({isSubmitting}) => (
-                <Form>
-                    <div className={s.header}>
-                        <NavLink className={s.title} to='/login'>Newborn</NavLink>
-                        <div className={s.auth}>
-                            <div className={s.login}>
-                                <NavLink  to='/login'>Login in</NavLink>
-                            </div>
-                            <div className={s.login}>
-                                <NavLink to='/register'>Register</NavLink>
-                            </div>
+        <form onSubmit={formik.handleSubmit}>
+            <div className="auth-block">
+                <div className="card">
+                    <div className="card-content">
+                        <span className="card-title">{namePage}</span>
+                        <div className="input-field">
+                            <input id="email" type="email" name='email' onChange={formik.handleChange}
+                                   onBlur={formik.handleBlur} value={formik.values.email}/>
+                            <label htmlFor="email">Email:</label>
+                            <span className="helper-text red-text">
+                             {formik.touched.email && formik.errors.email ? <span>{formik.errors.email}</span> : null}
+                            </span>
+
+                        </div>
+                        <div className="input-field">
+                            <input id="password" type="password" name='password' onChange={formik.handleChange}
+                                   onBlur={formik.handleBlur} value={formik.values.password}/>
+                            <label htmlFor="password">Пароль:</label>
+                            <span className="helper-text red-text">
+                            {formik.touched.password && formik.errors.password ?
+                                <span>{formik.errors.password}</span> : null}
+                        </span>
                         </div>
                     </div>
-                    <div className={s.block}>
-                        <div className={s.card}>
-                            <div className={s.content}>
-                                <span className={s.cardTitle}>{namePage}</span>
-                                <div className={s.field}>
-                                    <Field clssName={s.active} type='text' name='email' placeholder='email'/>
-                                </div>
-                                <div className={s.field}><Field type='password' name='password' placeholder='password'/></div>
-                            </div>
-                            <div className={s.action}>
-                                <button className={cn(s.btn, '' + (isDisabled ? s.active : ''))} type='submit' disabled={isSubmitting || isDisabled}>
-                                    {nameBtn}
-                                </button>
-                            </div>
-                        </div>
+                    <div className="card-action">
+                        <button type='submit' className="modal-action btn waves-effect" disabled={isDisabled}>{nameBtn}</button>
                     </div>
-                </Form>
-            )}
-        </Formik>
+                </div>
+            </div>
+        </form>
     )
 }

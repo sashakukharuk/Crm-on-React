@@ -1,10 +1,13 @@
-.app-wrapper {
-  display: grid;
-
-  grid-template-areas:
-	"s c";
-  /*grid-template-rows: 60px 1fr;*/
-  grid-template-columns: 2fr 10fr;
-  /*	grid-column-gap: 10px;*/
-
+@media (max-width: 760px) {
+    .sidenav {
+        display: contents;
+        width: 100%;
+    }
+    .a-sidenav .bold.last {
+        position: static;
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14);
+    }
+    .content {
+        margin: 0;
+    }
 }

@@ -13,7 +13,7 @@ type RequestOverview = {
 
 export const requestAnalyticsAPI = {
     getAnalytics (token: string | null) {
-        return instance.get<RequestAnalyticsType>('analytics/analytics', {
+        return instance.get<RequestAnalyticsType>('/api/analytics/analytics', {
             headers: {
                 Authorization: token
             }
@@ -21,7 +21,7 @@ export const requestAnalyticsAPI = {
     },
 
     getOverview (token: string | null) {
-        return instance.get<RequestOverview>('analytics/overview', {
+        return instance.get<RequestOverview>('/api/analytics/overview', {
             headers: {
                 Authorization: token
             }

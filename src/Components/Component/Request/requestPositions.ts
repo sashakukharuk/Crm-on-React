@@ -3,7 +3,7 @@ import {PositionsType} from "../../../State/positions-reducer";
 
 export const requestPositionsApi = {
     getByIdPositions (token: string | null, categoryId: string) {
-        return instance.get(`position/${categoryId}`, {
+        return instance.get(`/api/position/${categoryId}`, {
             headers: {
                 Authorization: token
             }
@@ -11,7 +11,7 @@ export const requestPositionsApi = {
     },
 
     postPositions (token: string | null, position: PositionsType) {
-        return instance.post('position', position, {
+        return instance.post('/api/position', position, {
             headers: {
                 Authorization: token
             }
@@ -19,7 +19,7 @@ export const requestPositionsApi = {
     },
 
     patchPositions (token: string | null, position: PositionsType) {
-        return instance.patch(`position/${position._id}`, position, {
+        return instance.patch(`/api/position/${position._id}`, position, {
             headers: {
                 Authorization: token
             }
@@ -27,7 +27,7 @@ export const requestPositionsApi = {
     },
 
     deletePositions (token: string | null, positionId: string | undefined) {
-        return instance.delete(`position/${positionId}`, {
+        return instance.delete(`/api/position/${positionId}`, {
             headers: {
                 Authorization: token
             }

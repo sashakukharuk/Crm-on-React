@@ -3,6 +3,7 @@ import {FormPositions} from "../../../Component/Forma/FormaPositions";
 import {PositionsType} from "../../../../State/positions-reducer";
 import {useDispatch} from "react-redux";
 import s from './PositionForm.module.css'
+
 type PropsType = {
     isDisabled: boolean
     positionId: string | undefined
@@ -16,7 +17,7 @@ type PropsType = {
 export const PositionForm: React.FC<PropsType> = ({isDisabled, positionId, name, cost, categoryId, token, ofForm, positionThunk}) => {
 
     const dispatch = useDispatch()
-    const submit = (values: any, {setSubmitting} : {setSubmitting: (isSubmitting: boolean) => void}) => {
+    const submit = (values: PositionsType) => {
         const position: PositionsType = {
             _id: positionId,
             name: values.name,
@@ -25,14 +26,13 @@ export const PositionForm: React.FC<PropsType> = ({isDisabled, positionId, name,
         }
         dispatch(positionThunk(token, position))
         dispatch(ofForm(false))
-        setSubmitting(false)
     }
     const changeIsForm = () => {
         dispatch(ofForm(false))
     }
     return (
         <div>
-            <FormPositions isDisabled={isDisabled} name={name} cost={cost} submit={submit} changeIsForm={changeIsForm}/>
+            <FormPositions isDisabled={isDisabled} name={name} cost={cost} onSubmit={submit} changeIsForm={changeIsForm}/>
             <div className={s.modalOverlay} onClick={changeIsForm}/>
         </div>
     )

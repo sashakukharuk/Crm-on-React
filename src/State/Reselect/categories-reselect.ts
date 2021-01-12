@@ -4,6 +4,10 @@ export const ImageSelector = (state: AppStateType) => {
     return state.categoriesPage.image
 }
 
+export const ImagePreviewSelector = (state: AppStateType) => {
+    return state.categoriesPage.imagePreview
+}
+
 export const IsNewSelector = (state: AppStateType) => {
     return state.categoriesPage.isNew
 }

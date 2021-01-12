@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import {Position} from "./Position";
 import {useDispatch, useSelector} from "react-redux";
-import s from './Positions.module.css'
 
 import {
     actions,
@@ -15,22 +14,22 @@ import {
     IsFormSelector,
     IsUpDateSelector,
     PositionSelector,
-    PositionsSelector, RemovePositionSelector
+    PositionsSelector
 } from "../../../../State/Reselect/position-reselect";
 import {TokenSelector} from "../../../../State/Reselect/auth-reselect";
+import {Preloader} from "../../../Component/Preloader/Preloader";
 
 type PropsType = {
     categoryId: string
 }
 
-export const Positions: React.FC<PropsType> = ({categoryId}) => {
+export const Positions: React.FC<PropsType> = React.memo(({categoryId}) => {
     const isForm = useSelector(IsFormSelector)
     const isUpdate = useSelector(IsUpDateSelector)
     const token = useSelector(TokenSelector)
     const positions = useSelector(PositionsSelector)
     const position = useSelector(PositionSelector)
     const isDisabled = useSelector(IsDisabledSelector)
-    const removePosition = useSelector(RemovePositionSelector)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getPositionsThunk(token, categoryId))
@@ -38,34 +37,39 @@ export const Positions: React.FC<PropsType> = ({categoryId}) => {
     const changeIsForm = () => {
         dispatch(actions.isFormAC(true))
     }
-    return (
-        <div>
-            <div className={s.pageSubtitle}>
-                <h4>Positions:</h4>
-                <button onClick={changeIsForm}>
-                    Add positions
-                </button>
-            </div>
-            {positions.length !== 0
-                ? positions.map(p => <Position key={p._id} position={p} token={token} categoryId={categoryId} removePositionOnId={removePosition}/>)
-                : <div>
-                    There are no positions in the category
+
+    return <>
+        <div className="row">
+            <div className="col s12">
+                <div className="page-subtitle">
+                    <h4>Positions:</h4>
+                    <button className="waves-effect waves-light btn grey darken-1 btn-small modal-trigger"
+                            data-target="create-modal" onClick={changeIsForm}>
+                        Add positions
+                    </button>
                 </div>
-            }
-            {isForm && <PositionForm
-                isDisabled={isDisabled}
-                positionId={position._id}
-                name={''}
-                cost={1}
-                categoryId={categoryId} ofForm={actions.isFormAC}
-                token={token} positionThunk={createPositionsThunk}/>}
-            {isUpdate && <PositionForm
-                isDisabled={isDisabled}
-                positionId={position._id}
-                name={position.name}
-                cost={position.cost}
-                categoryId={categoryId} ofForm={actions.isUpaDate}
-                token={token} positionThunk={updatePositionsThunk}/>}
+                {!positions ? <Preloader/>
+                : positions.length !== 0
+                    ? <Position positions={positions} token={token} categoryId={categoryId}/>
+                    : <div className="center">
+                        There are no positions in the category
+                    </div>
+                }
+            </div>
         </div>
-    )
-}
+        {isForm && <PositionForm
+            isDisabled={isDisabled}
+            positionId={position._id}
+            name={''}
+            cost={1}
+            categoryId={categoryId} ofForm={actions.isFormAC}
+            token={token} positionThunk={createPositionsThunk}/>}
+        {isUpdate && <PositionForm
+            isDisabled={isDisabled}
+            positionId={position._id}
+            name={position.name}
+            cost={position.cost}
+            categoryId={categoryId} ofForm={actions.isUpaDate}
+            token={token} positionThunk={updatePositionsThunk}/>}
+    </>
+})

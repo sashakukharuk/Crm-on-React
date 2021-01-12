@@ -3,14 +3,14 @@ import {instance} from "./request";
 
 export const requestCategoriesApi = {
     getCategories (token: string | null) {
-        return instance.get('category', {
+        return instance.get('/api/category', {
             headers: {
                 Authorization: token
             }
         }).then(res => res.data)
     },
     getByIdCategory (token: string | null, categoryId: string) {
-        return instance.get(`category/${categoryId}`, {
+        return instance.get(`/api/category/${categoryId}`, {
             headers: {
                 Authorization: token
             }
@@ -24,7 +24,7 @@ export const requestCategoriesApi = {
         }
         fd.append('name', categories.name)
 
-        return instance.post('category', fd, {
+        return instance.post('/api/category', fd, {
             headers: {
                 'content-type': 'multipart/form-data',
                 Authorization: token
@@ -39,7 +39,7 @@ export const requestCategoriesApi = {
         }
         fd.append('name', categories.name)
 
-        return instance.patch(`category/${categoryId}`, fd, {
+        return instance.patch(`/api/category/${categoryId}`, fd, {
             headers: {
                 'content-type': 'multipart/form-data',
                 Authorization: token
@@ -48,7 +48,7 @@ export const requestCategoriesApi = {
     },
 
     deleteByIdCategory (token: string | null, categoryId: string) {
-        return instance.delete(`category/${categoryId}`, {
+        return instance.delete(`/api/category/${categoryId}`, {
             headers: {
                 Authorization: token
             }

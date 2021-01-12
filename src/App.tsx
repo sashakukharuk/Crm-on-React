@@ -3,7 +3,7 @@ import './App.css'
 import './Components/Component/Style/content.css'
 import {LoginPage} from "./Components/Login/LoginPage";
 import {RegisterPage} from "./Components/Register/RegisterPage";
-import {BrowserRouter, Route} from "react-router-dom";
+import {BrowserRouter, Redirect, Route} from "react-router-dom";
 import {Sidebar} from "./Components/Sidebar/Sidebar";
 import {useDispatch, useSelector} from "react-redux";
 import {Categories} from "./Components/Categories/Assortment";
@@ -16,6 +16,8 @@ import {OrderPositions} from "./Components/Order/OrderPositions/OrderPositions";
 import {HistoryPage} from "./Components/History/HistoryPage";
 import {AnalyticsPage} from "./Components/Analytics/AnalyticsPage";
 import {OverviewPage} from "./Components/Overview/OverviewPage";
+import {Header} from "./Components/Header/Header";
+import {Floating} from "./Components/Floating/Floating";
 
 const App: React.FC = () => {
     const token = useSelector(TokenSelector)
@@ -23,13 +25,13 @@ const App: React.FC = () => {
     useEffect(() => {
         dispatch(getTokenThunk())
     }, [dispatch, token])
-
     return (
         <BrowserRouter>
             {token
-                ? <div className='app-wrapper'>
+                ? <div>
+                    <Redirect to='/overview'/>
                     <Sidebar/>
-                    <div className='content'>
+                    <main className="content">
                         <Route path='/overview' render={() => <OverviewPage/>}/>
                         <Route path='/analytics' render={() => <AnalyticsPage/>}/>
                         <Route path='/history' render={() => <HistoryPage/>}/>
@@ -39,9 +41,12 @@ const App: React.FC = () => {
                         <Route exact path='/categories' render={() => <Categories/>}/>
                         <Route path='/categories/new!' render={() => <CategoryForm/>}/>
                         <Route path='/categories/:id' render={() => <CategoryForm/>}/>
-                    </div>
+                    </main>
+                    <Floating/>
                 </div>
                 : <div>
+                    <Redirect to='/login'/>
+                    <Header/>
                     <Route path='/login' render={() => <LoginPage/>}/>
                     <Route path='/register' render={() => <RegisterPage/>}/>
                 </div>
