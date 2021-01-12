@@ -2,7 +2,7 @@ import React from 'react'
 import s from './Sidbar.module.css'
 import {NavLink} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {removeTokenThunk} from "../../State/auth-reducer";
+import {actions} from "../../State/auth-reducer";
 
 export const Sidebar = () => {
     const dispatch = useDispatch()
@@ -14,7 +14,10 @@ export const Sidebar = () => {
         <li className="bold"><NavLink to='/order' className="waves-effect waves-orange" activeClassName={s.active}>Add order</NavLink></li>
         <li className="bold "><NavLink to='/categories' className="waves-effect waves-orange" activeClassName={s.active}>Assortment</NavLink></li>
         <li className="bold last">
-            <NavLink to='/login' onClick={() => dispatch(removeTokenThunk())} className="waves-effect waves-orange" activeClassName={s.active}>Log out</NavLink>
+            <NavLink to='/login' onClick={() => {
+                localStorage.removeItem('token')
+                dispatch(actions.loginUser(''))
+            }} className="waves-effect waves-orange" activeClassName={s.active}>Log out</NavLink>
         </li>
     </ul>
 }

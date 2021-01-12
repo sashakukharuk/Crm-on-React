@@ -44,3 +44,10 @@
 .footer button {
     margin-left: 10px;
 }
+
+@media (max-width: 600px) {
+    .modal {
+        margin: 0;
+        width: 100%;
+    }
+}

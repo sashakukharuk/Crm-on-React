@@ -7,7 +7,6 @@ import {BrowserRouter, Redirect, Route} from "react-router-dom";
 import {Sidebar} from "./Components/Sidebar/Sidebar";
 import {useDispatch, useSelector} from "react-redux";
 import {Categories} from "./Components/Categories/Assortment";
-import {getTokenThunk} from "./State/auth-reducer";
 import {CategoryForm} from "./Components/Categories/CategoryForm/CategoryForm";
 import {TokenSelector} from "./State/Reselect/auth-reselect";
 import {OrderPage} from "./Components/Order/Order";
@@ -18,13 +17,18 @@ import {AnalyticsPage} from "./Components/Analytics/AnalyticsPage";
 import {OverviewPage} from "./Components/Overview/OverviewPage";
 import {Header} from "./Components/Header/Header";
 import {Floating} from "./Components/Floating/Floating";
+import {actions} from "./State/auth-reducer";
 
 const App: React.FC = () => {
-    const token = useSelector(TokenSelector)
+    let token = useSelector(TokenSelector)
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(getTokenThunk())
+        if (!token) {
+            token = localStorage.getItem('token')
+            dispatch(actions.loginUser(token))
+        }
     }, [dispatch, token])
+
     return (
         <BrowserRouter>
             {token

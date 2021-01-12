@@ -37,6 +37,7 @@ export const actions = {
 export const loginThunk = (user: User): ThunkType => async (dispatch) => {
     dispatch(actions.isDisabledAC(true))
     await requestAuth.postLogin(user).then(res => {
+        localStorage.setItem('token', res.data.token)
         dispatch(actions.loginUser(res.data.token))
     }).catch(error => {
         MaterialService.toast(error.response.data.message)
@@ -50,14 +51,4 @@ export const registerThunk = (user: User): ThunkType => async (dispatch) => {
         MaterialService.toast(error.response.data.message)
     })
     dispatch(actions.isDisabledAC(false))
-}
-
-export const getTokenThunk = (): ThunkType => async (dispatch) => {
-    let data = await requestAuth.getToken()
-    dispatch(actions.loginUser(data))
-}
-
-export const removeTokenThunk = (): ThunkType => async (dispatch) => {
-    let data = await requestAuth.removeToken()
-    dispatch(actions.loginUser(data))
 }
