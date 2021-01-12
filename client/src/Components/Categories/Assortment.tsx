@@ -40,7 +40,7 @@ export const Categories: React.FC = () => {
                     </div>
                 </div>
                 : <div className="center">
-                    You do not categories
+                    There are no categories
                 </div>}
     </>
 }

@@ -19,12 +19,12 @@ module.exports.login = async function (req, res) {
             
         } else {
             res.status(401).json({
-                message: 'password do not match'
+                message: 'Password is invalid'
             })
         }
     } else {
         res.status(404).json({
-            message: 'User not fond'
+            message: 'User not found'
         })
     }
 }
